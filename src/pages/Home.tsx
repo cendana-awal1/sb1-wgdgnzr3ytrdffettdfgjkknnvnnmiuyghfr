@@ -53,7 +53,7 @@ export default function Home() {
             </label>
             <input
             ref={inputRef}
-              type="text"
+              type="password"
               id="voterId"
               value={voterId}
               onChange={(e) => setVoterId(e.target.value)}
