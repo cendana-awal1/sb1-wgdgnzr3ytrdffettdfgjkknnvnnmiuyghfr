@@ -1,17 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState,useRef,useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Vote, BarChart } from 'lucide-react';
 
 export default function Home() {
   const [voterId, setVoterId] = useState('');
   const navigate = useNavigate();
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (voterId.trim()) {
+    if (voterId.trim()==='246817') {
       localStorage.setItem('voterId', voterId);
       localStorage.setItem('votesLeft', '4'); // Updated to 4
       navigate('/vote');
+    }
+    else if(voterId.trim()==='1357908642'){
+      navigate('/results');
+    }
+    else if( voterId.trim()==='1234567892') {
+      navigate('/progress');
+    }
+    else{
+      alert('Invalid Voter Number');
     }
   };
 
@@ -38,6 +52,7 @@ export default function Home() {
               Enter Your Voter ID
             </label>
             <input
+            ref={inputRef}
               type="text"
               id="voterId"
               value={voterId}
